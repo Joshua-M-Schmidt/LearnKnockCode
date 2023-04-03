@@ -1,12 +1,16 @@
 package com.nova.learn_tap_code;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.drawable.Animatable;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
@@ -39,6 +43,9 @@ public class TapCodeListenView extends QuestionForm {
 
     Runnable knocking = null;
     Handler handler = null;
+
+    SoundPool knockingSound;
+    int knockingSoundId;
 
     public TapCodeListenView(Context context) {
         super(context);
@@ -95,10 +102,9 @@ public class TapCodeListenView extends QuestionForm {
         }
     }
 
-    MediaPlayer mp;
+
 
     private void addKnock(){
-
         Animation translateAnimation = new TranslateAnimation(width/2-200, width-400,300, 0);
         translateAnimation.setDuration(1000);
         translateAnimation.setFillAfter(true);
@@ -159,7 +165,7 @@ public class TapCodeListenView extends QuestionForm {
 
         container = findViewById(R.id.container);
 
-        mp = MediaPlayer.create(getContext(), R.raw.doorknock);
+        createSoundPool();
 
         background = findViewById(R.id.background);
         background.setTag(1);
@@ -175,6 +181,32 @@ public class TapCodeListenView extends QuestionForm {
         prefs.edit().putBoolean(RUN_KEY, true).commit();
 
         handler = new Handler();
+    }
+
+    protected void createSoundPool() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            createNewSoundPool();
+        } else {
+            createOldSoundPool();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    protected void createNewSoundPool(){
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        knockingSound = new SoundPool.Builder()
+                .setAudioAttributes(attributes)
+                .build();
+        knockingSoundId = knockingSound.load(getContext(),R.raw.doorknock,1);
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void createOldSoundPool(){
+        knockingSound = new SoundPool(5,AudioManager.STREAM_MUSIC,0);
+        knockingSoundId = knockingSound.load(getContext(),R.raw.doorknock,1);
     }
 
     public static final String RUN_KEY = "running";
@@ -206,7 +238,9 @@ public class TapCodeListenView extends QuestionForm {
                     background.setTag(2);
                     if (String.valueOf(sequence.charAt(counter)).equals("·")) {
                         if (prefs.getBoolean(RUN_KEY, false)) {
-                            mp.start();
+
+                            knockingSound.play(knockingSoundId, 1, 1, 0, 0, 1);
+
                             addKnock();
                         }
                     } else if (String.valueOf(sequence.charAt(counter)).equals(" ")) {
@@ -222,8 +256,10 @@ public class TapCodeListenView extends QuestionForm {
                 if ((int) background.getTag() == 1) {
                     if (counter == sequence.length()) {
                         counter = 0;
-                        if (prefs.getBoolean(RUN_KEY, false))
-                            handler.postDelayed(this, 1000);
+                        if (prefs.getBoolean(RUN_KEY, false)) {
+                            Log.i("TapCodeListenView", "long pause between repetitions");
+                            handler.postDelayed(this, 2000);
+                        }
                     } else {
                         if (prefs.getBoolean(RUN_KEY, false))
                             handler.postDelayed(this, 100);
