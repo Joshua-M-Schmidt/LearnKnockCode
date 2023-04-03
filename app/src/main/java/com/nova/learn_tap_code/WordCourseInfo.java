@@ -14,12 +14,13 @@ import java.util.Random;
 import static com.nova.learn_tap_code.TapCodeInfo.letterToTapCode;
 import static com.nova.learn_tap_code.framework.Courselist.LAST_CLASS;
 
+
 public class WordCourseInfo extends CourseInfo {
 
     public SharedPreferences prefs;
 
     public WordCourseInfo(Context ctx) {
-        super(R.drawable.word_course, 0xff704f3f, "Train Tap Code\nWords", "alphabet_course_key", ctx, false);
+        super(R.drawable.word_course, 0xff704f3f, "Train Tap Code\nWords", "word_course_key", ctx, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 

@@ -4,12 +4,14 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
+
     android:scaleType="centerCrop">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/knock_code_back"
-        android:scaleType="centerCrop"
+        android:background="#A06645"
+        android:scaleType="fitCenter"
         android:id="@+id/background"/>
 
     <com.daasuu.bl.BubbleLayout
@@ -42,7 +44,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
-                android:text="What is the letter?"
+                android:text="@string/question_letter"
                 android:textAlignment="center"
                 android:textColor="@color/grey"
                 android:textSize="17dp"

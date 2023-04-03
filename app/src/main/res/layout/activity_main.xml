@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/container"
-    android:background="#606060"
+    android:background="#A06645"
     android:scaleType="centerCrop"
     tools:context="com.nova.learningframework.Courselist">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"
+        android:scaleType="fitCenter"
         android:id="@+id/background"/>
 
     <com.google.android.material.appbar.AppBarLayout

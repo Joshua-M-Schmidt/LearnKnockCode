@@ -79,6 +79,7 @@ public class Courselist extends AppCompatActivity {
         decorView.setSystemUiVisibility(uiOptions);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 
+
         // Check if no view has focus:
         View view = this.getCurrentFocus();
         if (view != null) {

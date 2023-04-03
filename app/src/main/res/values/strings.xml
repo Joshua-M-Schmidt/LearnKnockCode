@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Learn Tap Code</string>
+    <string name="question_letter">What is the letter?</string>
+    <string name="question_word">What is the word?</string>
 </resources>

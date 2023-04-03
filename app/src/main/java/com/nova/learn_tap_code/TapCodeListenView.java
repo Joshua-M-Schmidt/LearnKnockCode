@@ -13,6 +13,7 @@ import android.media.ToneGenerator;
 import android.os.Build;
 import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.text.InputFilter;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
@@ -27,6 +28,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.nova.learn_tap_code.framework.Question;
 import com.nova.learn_tap_code.framework.QuestionForm;
@@ -36,6 +38,7 @@ public class TapCodeListenView extends QuestionForm {
 
     private ImageView background;
     private EditText answer;
+    private TextView questionView;
     private Question questionInfo;
     private SharedPreferences prefs;
     private Context ctx;
@@ -89,6 +92,10 @@ public class TapCodeListenView extends QuestionForm {
     public void setQuestion(Question question) {
         this.questionInfo = question;
         knocking = getKnockingRunnable(question.morse);
+        if(question.normal.length()>1){
+            questionView.setText(R.string.question_word);
+            answer.setFilters(new InputFilter[] { new InputFilter.LengthFilter(100) });
+        }
         blink(question.morse);
     }
 
@@ -169,6 +176,8 @@ public class TapCodeListenView extends QuestionForm {
 
         background = findViewById(R.id.background);
         background.setTag(1);
+
+        questionView = findViewById(R.id.question);
 
         answer = findViewById(R.id.answer);
 

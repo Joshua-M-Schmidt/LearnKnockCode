@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/knock_code_back"
-        android:scaleType="centerCrop"
+        android:background="#A06645"
+        android:scaleType="fitCenter"
         android:id="@+id/background"></ImageView>
 
     <RelativeLayout
