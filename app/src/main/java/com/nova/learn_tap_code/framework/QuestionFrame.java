@@ -1,5 +1,7 @@
 package com.nova.learn_tap_code.framework;
 
+import static com.nova.learn_tap_code.TapCodeListenView.RUN_KEY;
+
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
@@ -197,7 +199,7 @@ public class QuestionFrame extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        prefs.edit().putBoolean("running", true).commit();
+        prefs.edit().putBoolean(RUN_KEY,false).commit();
         startActivity(new Intent(this,parent));
         return false;
     }

@@ -37,6 +37,9 @@ public class TapCodeListenView extends QuestionForm {
     private Context ctx;
     private RelativeLayout container;
 
+    Runnable knocking = null;
+    Handler handler = null;
+
     public TapCodeListenView(Context context) {
         super(context);
         this.ctx = context;
@@ -67,8 +70,18 @@ public class TapCodeListenView extends QuestionForm {
     }
 
     @Override
+    public void onDetachedFromWindow(){
+        super.onDetachedFromWindow();
+        if(knocking != null){
+            handler.removeCallbacks(knocking);
+        }
+    }
+
+
+    @Override
     public void setQuestion(Question question) {
         this.questionInfo = question;
+        knocking = getKnockingRunnable(question.morse);
         blink(question.morse);
     }
 
@@ -160,6 +173,8 @@ public class TapCodeListenView extends QuestionForm {
 
         prefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         prefs.edit().putBoolean(RUN_KEY, true).commit();
+
+        handler = new Handler();
     }
 
     public static final String RUN_KEY = "running";
@@ -177,49 +192,52 @@ public class TapCodeListenView extends QuestionForm {
         destroy = false;
         counter = 0;
 
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
+        handler.postDelayed(knocking, 1000);
+    }
+
+    private Runnable getKnockingRunnable(final String sequence){
+        return new Runnable() {
             @Override
             public void run() {
-                Log.i("blink_test","run "+prefs.getBoolean(RUN_KEY,false));
+                Log.i("blink_test", "run " + prefs.getBoolean(RUN_KEY, false));
 
-                if((int) background.getTag() == 1){
+                if ((int) background.getTag() == 1) {
                     //ship.setImageResource(2);
                     background.setTag(2);
-                    if(String.valueOf(sequence.charAt(counter)).equals("·")){
-                        if(prefs.getBoolean(RUN_KEY,false)){
+                    if (String.valueOf(sequence.charAt(counter)).equals("·")) {
+                        if (prefs.getBoolean(RUN_KEY, false)) {
                             mp.start();
                             addKnock();
                         }
-                    }else if(String.valueOf(sequence.charAt(counter)).equals(" ")){
+                    } else if (String.valueOf(sequence.charAt(counter)).equals(" ")) {
 
                     }
-                }else{
+                } else {
                     //ship.setImageResource(1);
                     background.setTag(1);
                 }
 
-                Log.i(tag,""+counter);
+                Log.i(tag, "" + counter);
 
-                if((int) background.getTag() == 1){
-                    if(counter == sequence.length()){
+                if ((int) background.getTag() == 1) {
+                    if (counter == sequence.length()) {
                         counter = 0;
-                        if(prefs.getBoolean(RUN_KEY,false))
+                        if (prefs.getBoolean(RUN_KEY, false))
                             handler.postDelayed(this, 1000);
-                    }else{
-                        if(prefs.getBoolean(RUN_KEY,false))
+                    } else {
+                        if (prefs.getBoolean(RUN_KEY, false))
                             handler.postDelayed(this, 100);
                     }
 
-                }else{
+                } else {
 
-                    Log.i(tag,String.valueOf(sequence.charAt(counter)));
+                    Log.i(tag, String.valueOf(sequence.charAt(counter)));
 
-                    if(String.valueOf(sequence.charAt(counter)).equals("·")){
-                        if(prefs.getBoolean(RUN_KEY,false))
+                    if (String.valueOf(sequence.charAt(counter)).equals("·")) {
+                        if (prefs.getBoolean(RUN_KEY, false))
                             handler.postDelayed(this, 150);
-                    }else if(String.valueOf(sequence.charAt(counter)).equals(" ")){
-                        if(prefs.getBoolean(RUN_KEY,false))
+                    } else if (String.valueOf(sequence.charAt(counter)).equals(" ")) {
+                        if (prefs.getBoolean(RUN_KEY, false))
                             handler.postDelayed(this, 600);
                     }
 
@@ -227,6 +245,6 @@ public class TapCodeListenView extends QuestionForm {
 
                 }
             }
-        }, 1000);
+        };
     }
 }

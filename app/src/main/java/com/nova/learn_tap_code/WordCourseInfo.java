@@ -18,47 +18,35 @@ public class WordCourseInfo extends CourseInfo {
 
     public SharedPreferences prefs;
 
-    public WordCourseInfo(Context ctx){
-        super(R.drawable.word_course,0xff704f3f,"Train Tap Code\nWords","alphabet_course_key",ctx,false);
+    public WordCourseInfo(Context ctx) {
+        super(R.drawable.word_course, 0xff704f3f, "Train Tap Code\nWords", "alphabet_course_key", ctx, false);
         prefs = PreferenceManager.getDefaultSharedPreferences(ctx);
     }
 
     @Override
-    public Class getNextActivity(){
+    public Class getNextActivity() {
         ArrayList<Class> question_list = new ArrayList<>();
         question_list.add(TapCodeListenFrame.class);
         question_list.add(TapCodeTapFrame.class);
 
-        Log.i("getNextActivity","last "+prefs.getString(LAST_CLASS,""));
+        Log.i("getNextActivity", "last " + prefs.getString(LAST_CLASS, ""));
 
 
         Class cl = question_list.get(new Random().nextInt(question_list.size()));
-        prefs.edit().putString(cl.getName(),"").commit();
+        prefs.edit().putString(cl.getName(), "").commit();
 
         return cl;
     }
 
     @Override
-    public int[] getLevels(){
+    public int[] getLevels() {
         return new int[]{
-                0,3,6,15,35,55,75,95,115,135,155,175,195,215,235,255,275,295,315,335,355,375,395,415,435,455,475
+                0, 3, 6, 15, 35, 55, 75, 95, 115, 135, 155, 175, 195, 215, 235, 255, 275, 295, 315, 335, 355
         };
     }
 
-    public  String levelLetter(){
-        switch (getLevel()){
-            case 1:
-                return "A";
-            case 2:
-                return "B";
-            case 3:
-                return "C";
-            case 4:
-                return "D";
-            case 5:
-                return "E";
-            case 6:
-                return "F";
+    public String levelLetter() {
+        switch (getLevel()) {
             case 7:
                 return "G";
             case 8:
@@ -105,102 +93,270 @@ public class WordCourseInfo extends CourseInfo {
     }
 
     @Override
-    public Question getQuestion(){
-        String[] letters;
+    public Question getQuestion() {
+        String[] words = new String[]{};
 
-        switch (getLevel()){
-            case 1:
-                letters = new String[]{"A"};
-                break;
+        switch (getLevel()) {
             case 2:
-                letters = new String[]{"A","B"};
+                words = new String[]{/*"age","bad","bag","bed","cab",*/"aged", "cafe", "cage", "deaf", "face", "fade", "badge",
+                        "chef", "each", "haed", "beach"};
                 break;
             case 3:
-                letters = new String[]{"A","B","C"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe",*/"cage", "deaf", "face", "fade", "badge",
+                        "chef", "each", "haed", "beach", "big", "bid", "chief", "dice", "dig", "hide", "ice", "idea", "if"};
                 break;
             case 4:
-                letters = new String[]{"A","B","C","D"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade",*/"badge",
+                        "chef", "each", "haed", "beach", "big", "bid", "chief", "dice", "dig", "hide", "ice", "idea", "if", "jade",
+                };
                 break;
             case 5:
-                letters = new String[]{"A","B","C","D","E"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each",*/"haed", "beach", "big", "bid", "chief", "dice", "dig", "hide", "ice", "idea", "if", "jade",
+                        "back", "bike", "cake", "deck", "fake", "faked", "hack", "hike", "jack",};
                 break;
             case 6:
-                letters = new String[]{"A","B","C","D","E","F"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide",*/"ice", "idea", "if", "jade",
+                        "back", "bike", "cake", "deck", "fake", "faked", "hack", "hike", "jack", "ale", "alike", "bagel", "balk", "blah",
+                        "cable", "calf", "chalk", "child", "deal", "dial", "elf", "fable", "fail", "file", "flag", "fled", "glad", "glide", "half",
+                        "heal", "held", "ideal", "jail", "laid", "leaf", "led", "lick", "lie", "lied", "liked"};
                 break;
             case 7:
-                letters = new String[]{"A","B","C","D","E","F","G"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal",*/"jail", "laid", "leaf", "led", "lick", "lie", "lied", "liked", "aim", "amid", "balm", "beam",
+                        "blame", "calm", "came", "camel", "claim", "climb", "dam", "dim", "email", "fame", "film", "flame", "gamble", "game", "ham",
+                        "helm", "him", "image", "jam", "lamb", "lame", "lime", "limb", "made", "make", "meal", "medal", "mice", "mild", "milk"};
                 break;
             case 8:
-                letters = new String[]{"A","B","C","D","E","F","G","H"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail",*/"laid", "leaf", "led", "lick", "lie", "lied", "liked", "aim", "amid", "balm", "beam",
+                        "blame", "calm", "came", "camel", "claim", "climb", "dam", "dim", "email", "fame", "film", "flame", "gamble", "game", "ham"
+                        , "again", "and", "animal", "bank", "begin", "behind", "can", "challenge", "chance", "change", "end", "feeling", "final", "financial", "find", "fine", "hand", "hang", "imagine", "in", "indeed", "kind", "land", "line", "machine", "main", "man", "manage", "mean", "mind", "name", "need", "nice"
+
+                };
                 break;
             case 9:
-                letters = new String[]{/*"A","B","C","D","E",*/"F","G","H","I"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail",*/"laid", "leaf", "led", "lick", "lie", "lied", "liked", "aim", "amid", "balm", "beam",
+                        "blame", "calm", "came", "camel", "claim", "climb", "dam", "dim", "email", "fame", "film", "flame", "gamble", "game", "ham",
+                        "ago", "alone", "along", "among", "become", "billion", "blood", "book", "choice", "coach", "cold", "college", "come",
+                        "common", "do", "dog", "economic", "food", "go", "goal", "good", "hold", "home", "job", "join", "local", "long", "look",
+                        "million", "model", "no", "none", "of", "off", "office", "official", "oh", "oil", "ok", "old", "on", "once", "one"
+
+                };
                 break;
             case 10:
-                letters = new String[]{/*"A","B","C","D","E","F",*/"G","H","I","J"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked",*/"aim", "amid", "balm", "beam",
+                        "blame", "calm", "came", "camel", "claim", "climb", "dam", "dim", "email", "fame", "film", "flame", "gamble", "game", "ham",
+                        "ago", "alone", "along", "among", "become", "billion", "blood", "book", "choice", "coach", "cold", "college", "come", "common", "do", "dog", "economic",
+                        "food", "go", "goal", "good", "hold", "home", "job", "join", "local", "long", "look", "million", "model", "no", "none",
+                        "of", "off", "office", "official", "oh", "oil", "ok", "old", "on", "once", "one"
+                        , "campaign", "deep", "happen", "help", "hope", "keep", "open", "page", "pain", "peace", "people", "phone", "pick", "piece", "place", "plan", "police"
+
+                };
                 break;
             case 11:
-                letters = new String[]{/*"A","B","C","D","E","F","G",*/"H","I","J","K"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,*/"ago", "alone", "along", "among", "become", "billion", "blood", "book", "choice", "coach", "cold", "college", "come",
+                        "common", "do", "dog", "economic", "food", "go", "goal", "good", "hold", "home", "job", "join", "local", "long", "look",
+                        "million", "model", "no", "none", "of", "off", "office", "official", "oh", "oil", "ok", "old", "on", "once", "one", "quad"
+                        , "campaign", "deep", "happen", "help", "hope", "keep", "open", "page", "pain", "peace", "people", "phone", "pick", "piece", "place", "plan", "police"
+
+                };
                 break;
             case 12:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H",*/"I","J","K","L"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,*/"ago", "alone", "along", "among", "become", "billion", "blood", "book", "choice", "coach", "cold", "college", "come",
+                        "common", "do", "dog", "economic", "food", "go", "goal", "good", "hold", "home", "job", "join", "local", "long", "look",
+                        "million", "model", "no", "none", "of", "off", "office", "official", "oh", "oil", "ok", "old", "on", "once", "one"
+                        , "campaign", "deep", "happen", "help", "hope", "keep", "open", "page", "pain", "peace", "people", "phone", "pick", "piece", "place", "plan", "police"
+                        , "according", "agree", "air", "appear", "approach", "area", "arm", "bar", "before", "board", "born", "break", "bring", "camera", "cancer", "car", "card", "care", "career", "chair", "charge", "clear", "color", "commercial", "compare", "concern", "conference", "crime", "dark", "degree", "difference", "dinner", "door", "dream", "drop", "far", "fear", "federal", "finger", "fire", "firm", "floor", "for", "force", "foreign", "form", "former", "free", "friend", "from", "garden", "general", "girl", "green", "hair", "hard", "hear", "her", "here", "large", "leader", "learn", "major", "manager", "marriage", "member", "modern", "more", "morning", "near", "nor", "offer", "officer", "or", "order", "paper", "per", "perform", "performance", "period", "poor", "prepare", "price", "problem", "program", "race", "radio", "range", "reach", "read", "real", "record", "red", "region", "remain", "remember", "rich", "road", "rock", "role", "room"
+
+                };
                 break;
             case 13:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I",*/"J","K","L","M"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,*/"ago", "alone", "along", "among", "become", "billion", "blood", "book", "choice", "coach", "cold", "college", "come",
+                        "common", "do", "dog", "economic", "food", "go", "goal", "good", "hold", "home", "job", "join", "local", "long", "look",
+                        "million", "model", "no", "none", "of", "off", "office", "official", "oh", "oil", "ok", "old", "on", "once", "one"
+                        , "campaign", "deep", "happen", "help", "hope", "keep", "open", "page", "pain", "peace", "people", "phone", "pick", "piece", "place", "plan", "police"
+                        , "across", "address", "also", "as", "ask", "base", "case", "choose", "class", "close", "consider", "decision", "defense", "describe", "design", "disease", "else", "finish", "fish", "gas", "glass", "herself", "himself", "his", "increase", "inside", "less", "lose", "loss", "message", "miss", "mission", "pass", "perhaps", "person", "personal", "possible", "process", "professional", "professor", "raise", "reason", "research", "respond", "response", "rise", "risk", "safe", "same", "scene", "school", "science", "score", "sea", "season", "second", "see", "seek", "seem", "sell", "send", "senior", "sense", "series", "shake", "share", "she", "side", "sign", "similar", "simple", "since", "sing", "single", "skill", "skin", "small", "smile", "so", "social", "soldier", "some", "someone", "son", "song", "soon", "space", "speak", "special", "specific", "speech", "spend", "spring"
+                };
                 break;
             case 14:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J",*/"K","L","M","N"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,"ago","alone","along","among","become","billion","blood","book","choice","coach","cold","college","come",
+                        "common","do","dog","economic","food","go","goal","good","hold","home","job","join","local","long","look",
+                        "million","model","no","none","of","off","office","official","oh","oil","ok","old","on","once","one"
+                        ,*/"quer", "quad", "quest", "campaign", "deep", "happen", "help", "hope", "keep", "open", "page", "pain", "peace", "people", "phone", "pick", "piece", "place", "plan", "police"
+                        , "across", "address", "also", "as", "ask", "base", "case", "choose", "class", "close", "consider", "decision", "defense", "describe", "design", "disease", "else", "finish", "fish", "gas", "glass", "herself", "himself", "his", "increase", "inside", "less", "lose", "loss", "message", "miss", "mission", "pass", "perhaps", "person", "personal", "possible", "process", "professional", "professor", "raise", "reason", "research", "respond", "response", "rise", "risk", "safe", "same", "scene", "school", "science", "score", "sea", "season", "second", "see", "seek", "seem", "sell", "send", "senior", "sense", "series", "shake", "share", "she", "side", "sign", "similar", "simple", "since", "sing", "single", "skill", "skin", "small", "smile", "so", "social", "soldier", "some", "someone", "son", "song", "soon", "space", "speak", "special", "specific", "speech", "spend", "spring"
+                        , "sport", "staff", "stage", "stand", "standard", "star", "start", "state", "statement", "station", "step", "still", "stock", "stop", "store", "street", "strong", "table", "take", "talk", "task", "teach", "teacher", "team", "tell", "ten", "tend", "term", "test", "than", "thank", "that", "the", "their", "them", "then", "there", "these", "thing", "think", "third", "this", "those", "threat", "three", "time", "to", "together", "tonight", "too", "top", "total", "trade", "traditional", "training", "treat", "treatment", "tree", "trial", "trip"
+
+                };
                 break;
             case 15:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K",*/"L","M","N","O"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,"ago","alone","along","among","become","billion","blood","book","choice","coach","cold","college","come",
+                        "common","do","dog","economic","food","go","goal","good","hold","home","job","join","local","long","look",
+                        "million","model","no","none","of","off","office","official","oh","oil","ok","old","on","once","one"
+                        ,*/"quer", "quad", "quest", "campaign", "deep", "happen", "help", "hope", "keep", "open", "page", "pain", "peace", "people", "phone", "pick", "piece", "place", "plan", "police"
+                        , "across", "address", "also", "as", "ask", "base", "case", "choose", "class", "close", "consider", "decision", "defense", "describe", "design", "disease", "else", "finish", "fish", "gas", "glass", "herself", "himself", "his", "increase", "inside", "less", "lose", "loss", "message", "miss", "mission", "pass", "perhaps", "person", "personal", "possible", "process", "professional", "professor", "raise", "reason", "research", "respond", "response", "rise", "risk", "safe", "same", "scene", "school", "science", "score", "sea", "season", "second", "see", "seek", "seem", "sell", "send", "senior", "sense", "series", "shake", "share", "she", "side", "sign", "similar", "simple", "since", "sing", "single", "skill", "skin", "small", "smile", "so", "social", "soldier", "some", "someone", "son", "song", "soon", "space", "speak", "special", "specific", "speech", "spend", "spring"
+                        , "sport", "staff", "stage", "stand", "standard", "star", "start", "state", "statement", "station", "step", "still", "stock", "stop", "store", "street", "strong", "table", "take", "talk", "task", "teach", "teacher", "team", "tell", "ten", "tend", "term", "test", "than", "thank", "that", "the", "their", "them", "then", "there", "these", "thing", "think", "third", "this", "those", "threat", "three", "time", "to", "together", "tonight", "too", "top", "total", "trade", "traditional", "training", "treat", "treatment", "tree", "trial", "trip"
+                        , "situation", "sound", "source", "south", "southern", "structure", "student", "stuff", "subject", "success", "successful", "such", "suffer", "suggest", "summer", "support", "sure", "surface", "though", "thought", "thousand", "through", "throughout", "thus", "tough", "trouble", "true", "truth", "turn", "under", "understand", "unit", "until", "up", "upon", "us", "use"
+
+                };
                 break;
             case 16:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L",*/"M","N","O","P"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,"ago","alone","along","among","become","billion","blood","book","choice","coach","cold","college","come",
+                        "common","do","dog","economic","food","go","goal","good","hold","home","job","join","local","long","look",
+                        "million","model","no","none","of","off","office","official","oh","oil","ok","old","on","once","one"
+                        ,"quer","quad","quest","campaign","deep","happen","help","hope","keep","open","page","pain","peace","people","phone","pick","piece","place","plan","police"
+                        ,*/"across", "address", "also", "as", "ask", "base", "case", "choose", "class", "close", "consider", "decision", "defense", "describe", "design", "disease", "else", "finish", "fish", "gas", "glass", "herself", "himself", "his", "increase", "inside", "less", "lose", "loss", "message", "miss", "mission", "pass", "perhaps", "person", "personal", "possible", "process", "professional", "professor", "raise", "reason", "research", "respond", "response", "rise", "risk", "safe", "same", "scene", "school", "science", "score", "sea", "season", "second", "see", "seek", "seem", "sell", "send", "senior", "sense", "series", "shake", "share", "she", "side", "sign", "similar", "simple", "since", "sing", "single", "skill", "skin", "small", "smile", "so", "social", "soldier", "some", "someone", "son", "song", "soon", "space", "speak", "special", "specific", "speech", "spend", "spring"
+                        , "sport", "staff", "stage", "stand", "standard", "star", "start", "state", "statement", "station", "step", "still", "stock", "stop", "store", "street", "strong", "table", "take", "talk", "task", "teach", "teacher", "team", "tell", "ten", "tend", "term", "test", "than", "thank", "that", "the", "their", "them", "then", "there", "these", "thing", "think", "third", "this", "those", "threat", "three", "time", "to", "together", "tonight", "too", "top", "total", "trade", "traditional", "training", "treat", "treatment", "tree", "trial", "trip"
+                        , "situation", "sound", "source", "south", "southern", "structure", "student", "stuff", "subject", "success", "successful", "such", "suffer", "suggest", "summer", "support", "sure", "surface", "though", "thought", "thousand", "through", "throughout", "thus", "tough", "trouble", "true", "truth", "turn", "under", "understand", "unit", "until", "up", "upon", "us", "use"
+                        , "individual", "investment", "involve", "leave", "level", "live", "love", "move", "movement", "movie", "never", "over", "positive", "prevent", "private", "prove", "provide", "receive", "remove", "reveal", "save", "serve", "service", "seven", "several", "television", "themselves", "travel", "value", "various", "victim", "violence", "visit", "voice", "vote"
+
+                };
                 break;
             case 17:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M",*/"N","O","P","Q"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,"ago","alone","along","among","become","billion","blood","book","choice","coach","cold","college","come",
+                        "common","do","dog","economic","food","go","goal","good","hold","home","job","join","local","long","look",
+                        "million","model","no","none","of","off","office","official","oh","oil","ok","old","on","once","one"
+                        ,"quer","quad","quest","campaign","deep","happen","help","hope","keep","open","page","pain","peace","people","phone","pick","piece","place","plan","police"
+                        ,"across","address","also","as","ask","base","case","choose","class","close","consider","decision","defense","describe","design","disease","else","finish","fish","gas","glass","herself","himself","his","increase","inside","less","lose","loss","message","miss","mission","pass","perhaps","person","personal","possible","process","professional","professor","raise","reason","research","respond","response","rise","risk","safe","same","scene","school","science","score","sea","season","second","see","seek","seem","sell","send","senior","sense","series","shake","share","she","side","sign","similar","simple","since","sing","single","skill","skin","small","smile","so","social","soldier","some","someone","son","song","soon","space","speak","special","specific","speech","spend","spring"
+                        ,*/"sport", "staff", "stage", "stand", "standard", "star", "start", "state", "statement", "station", "step", "still", "stock", "stop", "store", "street", "strong", "table", "take", "talk", "task", "teach", "teacher", "team", "tell", "ten", "tend", "term", "test", "than", "thank", "that", "the", "their", "them", "then", "there", "these", "thing", "think", "third", "this", "those", "threat", "three", "time", "to", "together", "tonight", "too", "top", "total", "trade", "traditional", "training", "treat", "treatment", "tree", "trial", "trip"
+                        , "situation", "sound", "source", "south", "southern", "structure", "student", "stuff", "subject", "success", "successful", "such", "suffer", "suggest", "summer", "support", "sure", "surface", "though", "thought", "thousand", "through", "throughout", "thus", "tough", "trouble", "true", "truth", "turn", "under", "understand", "unit", "until", "up", "upon", "us", "use"
+                        , "individual", "investment", "involve", "leave", "level", "live", "love", "move", "movement", "movie", "never", "over", "positive", "prevent", "private", "prove", "provide", "receive", "remove", "reveal", "save", "serve", "service", "seven", "several", "television", "themselves", "travel", "value", "various", "victim", "violence", "visit", "voice", "vote"
+                        , "two", "view", "wait", "walk", "wall", "want", "war", "watch", "water", "we", "weapon", "wear", "week", "weight", "well", "west", "western", "what", "whatever", "when", "where", "whether", "which", "while", "white", "who", "whole", "whom", "whose", "wide", "wife", "will", "win", "wind", "window", "wish", "with", "within", "without", "woman", "wonder", "word", "work", "worker", "world", "would", "write", "writer", "wrong"
+
+                };
                 break;
             case 18:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N",*/"O","P","Q","R"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,"ago","alone","along","among","become","billion","blood","book","choice","coach","cold","college","come",
+                        "common","do","dog","economic","food","go","goal","good","hold","home","job","join","local","long","look",
+                        "million","model","no","none","of","off","office","official","oh","oil","ok","old","on","once","one"
+                        ,"quer","quad","quest","campaign","deep","happen","help","hope","keep","open","page","pain","peace","people","phone","pick","piece","place","plan","police"
+                        ,"across","address","also","as","ask","base","case","choose","class","close","consider","decision","defense","describe","design","disease","else","finish","fish","gas","glass","herself","himself","his","increase","inside","less","lose","loss","message","miss","mission","pass","perhaps","person","personal","possible","process","professional","professor","raise","reason","research","respond","response","rise","risk","safe","same","scene","school","science","score","sea","season","second","see","seek","seem","sell","send","senior","sense","series","shake","share","she","side","sign","similar","simple","since","sing","single","skill","skin","small","smile","so","social","soldier","some","someone","son","song","soon","space","speak","special","specific","speech","spend","spring"
+                        ,"sport","staff","stage","stand","standard","star","start","state","statement","station","step","still","stock","stop","store","street","strong","table","take","talk","task","teach","teacher","team","tell","ten","tend","term","test","than","thank","that","the","their","them","then","there","these","thing","think","third","this","those","threat","three","time","to","together","tonight","too","top","total","trade","traditional","training","treat","treatment","tree","trial","trip"
+                        ,*/"situation", "sound", "source", "south", "southern", "structure", "student", "stuff", "subject", "success", "successful", "such", "suffer", "suggest", "summer", "support", "sure", "surface", "though", "thought", "thousand", "through", "throughout", "thus", "tough", "trouble", "true", "truth", "turn", "under", "understand", "unit", "until", "up", "upon", "us", "use"
+                        , "individual", "investment", "involve", "leave", "level", "live", "love", "move", "movement", "movie", "never", "over", "positive", "prevent", "private", "prove", "provide", "receive", "remove", "reveal", "save", "serve", "service", "seven", "several", "television", "themselves", "travel", "value", "various", "victim", "violence", "visit", "voice", "vote"
+                        , "two", "view", "wait", "walk", "wall", "want", "war", "watch", "water", "we", "weapon", "wear", "week", "weight", "well", "west", "western", "what", "whatever", "when", "where", "whether", "which", "while", "white", "who", "whole", "whom", "whose", "wide", "wife", "will", "win", "wind", "window", "wish", "with", "within", "without", "woman", "wonder", "word", "work", "worker", "world", "would", "write", "writer", "wrong"
+                        , "box", "example", "executive", "exist", "expect", "experience", "expert", "explain", "next", "six", "tax"
+
+                };
                 break;
             case 19:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O",*/"P","Q","R","S"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,"ago","alone","along","among","become","billion","blood","book","choice","coach","cold","college","come",
+                        "common","do","dog","economic","food","go","goal","good","hold","home","job","join","local","long","look",
+                        "million","model","no","none","of","off","office","official","oh","oil","ok","old","on","once","one"
+                        ,"quer","quad","quest","campaign","deep","happen","help","hope","keep","open","page","pain","peace","people","phone","pick","piece","place","plan","police"
+                        ,"across","address","also","as","ask","base","case","choose","class","close","consider","decision","defense","describe","design","disease","else","finish","fish","gas","glass","herself","himself","his","increase","inside","less","lose","loss","message","miss","mission","pass","perhaps","person","personal","possible","process","professional","professor","raise","reason","research","respond","response","rise","risk","safe","same","scene","school","science","score","sea","season","second","see","seek","seem","sell","send","senior","sense","series","shake","share","she","side","sign","similar","simple","since","sing","single","skill","skin","small","smile","so","social","soldier","some","someone","son","song","soon","space","speak","special","specific","speech","spend","spring"
+                        ,"sport","staff","stage","stand","standard","star","start","state","statement","station","step","still","stock","stop","store","street","strong","table","take","talk","task","teach","teacher","team","tell","ten","tend","term","test","than","thank","that","the","their","them","then","there","these","thing","think","third","this","those","threat","three","time","to","together","tonight","too","top","total","trade","traditional","training","treat","treatment","tree","trial","trip"
+                        ,"situation","sound","source","south","southern","structure","student","stuff","subject","success","successful","such","suffer","suggest","summer","support","sure","surface","though","thought","thousand","through","throughout","thus","tough","trouble","true","truth","turn","under","understand","unit","until","up","upon","us","use"
+                        ,*/"individual", "investment", "involve", "leave", "level", "live", "love", "move", "movement", "movie", "never", "over", "positive", "prevent", "private", "prove", "provide", "receive", "remove", "reveal", "save", "serve", "service", "seven", "several", "television", "themselves", "travel", "value", "various", "victim", "violence", "visit", "voice", "vote"
+                        , "two", "view", "wait", "walk", "wall", "want", "war", "watch", "water", "we", "weapon", "wear", "week", "weight", "well", "west", "western", "what", "whatever", "when", "where", "whether", "which", "while", "white", "who", "whole", "whom", "whose", "wide", "wife", "will", "win", "wind", "window", "wish", "with", "within", "without", "woman", "wonder", "word", "work", "worker", "world", "would", "write", "writer", "wrong"
+                        , "box", "example", "executive", "exist", "expect", "experience", "expert", "explain", "next", "six", "tax"
+                        , "pay", "physical", "play", "player", "policy", "pretty", "probably", "property", "quality", "quickly", "ready", "reality", "really", "recently", "responsibility", "say", "security", "simply", "society", "somebody", "stay", "story", "strategy", "study", "style", "suddenly", "system", "technology", "theory", "they", "today", "try", "type", "usually", "very", "way", "why", "worry", "yard", "yeah", "year", "yes", "yet", "you", "young", "your", "yourself"
+
+                };
                 break;
             case 20:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P",*/"Q","R","S","T"};
-                break;
-            case 21:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q",*/"R","S","T","U"};
-                break;
-            case 22:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R",*/"S","T","U","V"};
-                break;
-            case 23:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S",*/"T","U","V","W"};
-                break;
-            case 24:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T",*/"U","V","W","X"};
-                break;
-            case 25:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U",*/"V","W","X","Y"};
-                break;
-            case 26:
-                letters = new String[]{/*"A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V",*/"W","X","Y","Z"};
+                words = new String[]{/*"age","bad","bag","bed","cab","aged","cafe","cage","deaf","face","fade","badge",
+                        "chef","each","haed","beach","big","bid","chief","dice","dig","hide","ice","idea","if","jade",
+                        "back","bike","cake","deck","fake","faked","hack","hike","jack","ale","alike","bagel","balk","blah",
+                        "cable","calf","chalk","child","deal","dial","elf","fable","fail","file","flag","fled","glad","glide","half",
+                        "heal","held","ideal","jail","laid","leaf","led","lick","lie","lied","liked","aim","amid","balm","beam",
+                        "blame","calm","came","camel","claim","climb","dam","dim","email","fame","film","flame","gamble","game","ham"
+                        ,"ago","alone","along","among","become","billion","blood","book","choice","coach","cold","college","come",
+                        "common","do","dog","economic","food","go","goal","good","hold","home","job","join","local","long","look",
+                        "million","model","no","none","of","off","office","official","oh","oil","ok","old","on","once","one"
+                        ,"quer","quad","quest","campaign","deep","happen","help","hope","keep","open","page","pain","peace","people","phone","pick","piece","place","plan","police"
+                        ,"across","address","also","as","ask","base","case","choose","class","close","consider","decision","defense","describe","design","disease","else","finish","fish","gas","glass","herself","himself","his","increase","inside","less","lose","loss","message","miss","mission","pass","perhaps","person","personal","possible","process","professional","professor","raise","reason","research","respond","response","rise","risk","safe","same","scene","school","science","score","sea","season","second","see","seek","seem","sell","send","senior","sense","series","shake","share","she","side","sign","similar","simple","since","sing","single","skill","skin","small","smile","so","social","soldier","some","someone","son","song","soon","space","speak","special","specific","speech","spend","spring"
+                        ,"sport","staff","stage","stand","standard","star","start","state","statement","station","step","still","stock","stop","store","street","strong","table","take","talk","task","teach","teacher","team","tell","ten","tend","term","test","than","thank","that","the","their","them","then","there","these","thing","think","third","this","those","threat","three","time","to","together","tonight","too","top","total","trade","traditional","training","treat","treatment","tree","trial","trip"
+                        ,"situation","sound","source","south","southern","structure","student","stuff","subject","success","successful","such","suffer","suggest","summer","support","sure","surface","though","thought","thousand","through","throughout","thus","tough","trouble","true","truth","turn","under","understand","unit","until","up","upon","us","use"
+                        ,"individual","investment","involve","leave","level","live","love","move","movement","movie","never","over","positive","prevent","private","prove","provide","receive","remove","reveal","save","serve","service","seven","several","television","themselves","travel","value","various","victim","violence","visit","voice","vote"
+                        ,*/"two", "view", "wait", "walk", "wall", "want", "war", "watch", "water", "we", "weapon", "wear", "week", "weight", "well", "west", "western", "what", "whatever", "when", "where", "whether", "which", "while", "white", "who", "whole", "whom", "whose", "wide", "wife", "will", "win", "wind", "window", "wish", "with", "within", "without", "woman", "wonder", "word", "work", "worker", "world", "would", "write", "writer", "wrong"
+                        , "box", "example", "executive", "exist", "expect", "experience", "expert", "explain", "next", "six", "tax"
+                        , "pay", "physical", "play", "player", "policy", "pretty", "probably", "property", "quality", "quickly", "ready", "reality", "really", "recently", "responsibility", "say", "security", "simply", "society", "somebody", "stay", "story", "strategy", "study", "style", "suddenly", "system", "technology", "theory", "they", "today", "try", "type", "usually", "very", "way", "why", "worry", "yard", "yeah", "year", "yes", "yet", "you", "young", "your", "yourself"
+                        , "citizen", "magazine", "organization", "realize", "recognize", "size"
+
+                };
                 break;
             default:
-                letters = new String[]{"A","B","C","D","E"};
+                words = new String[]{"age", "bad", "bag", "bed", "cab", "aged", "cafe", "cage", "deaf", "face", "fade", "badge"};
                 break;
         }
 
-        String normal = "";
+        String normal;
         Random r = new Random();
 
-        int len = r.nextInt(3)+1;
-        for(int i = 0; i < len; i++){
-            normal += letters[r.nextInt(letters.length)];
-        }
+        normal = words[r.nextInt(words.length)];
 
-        return new Question(letterToTapCode(normal.toUpperCase()),normal.toUpperCase(),key);
+        return new Question(letterToTapCode(normal.toUpperCase()), normal.toUpperCase(), key);
     }
+
 
 }
