@@ -1,5 +1,7 @@
 package com.nova.learn_tap_code;
 
+import android.util.Log;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -45,10 +47,10 @@ public class TapCodeInfo {
             if(i == 0){
                 morse += alphabet.get(String.valueOf(text.charAt(i)));
             }else{
-                morse += " "+alphabet.get(String.valueOf(text.charAt(i)));
+                morse += "/"+alphabet.get(String.valueOf(text.charAt(i)));
             }
         }
-
+        Log.i("text_to_tap_code", text+" - "+morse);
         return morse;
     }
 }

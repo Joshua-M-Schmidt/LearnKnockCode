@@ -26,8 +26,8 @@ public class WordCourseInfo extends CourseInfo {
     @Override
     public Class getNextActivity() {
         ArrayList<Class> question_list = new ArrayList<>();
-        question_list.add(TapCodeListenFrame.class);
-        question_list.add(TapCodeTapFrame.class);
+        question_list.add(TapCodeListenWordFrame.class);
+        question_list.add(TapCodeTapWordFrame.class);
 
         Log.i("getNextActivity", "last " + prefs.getString(LAST_CLASS, ""));
 
@@ -94,7 +94,7 @@ public class WordCourseInfo extends CourseInfo {
 
     @Override
     public Question getQuestion() {
-        String[] words = new String[]{};
+        String[] words;
 
         switch (getLevel()) {
             case 2:

@@ -239,6 +239,9 @@ public class TapCodeListenView extends QuestionForm {
                     } else if (String.valueOf(sequence.charAt(counter)).equals(" ")) {
                         if (prefs.getBoolean(RUN_KEY, false))
                             handler.postDelayed(this, 600);
+                    } else if (String.valueOf(sequence.charAt(counter)).equals("/")) {
+                        if (prefs.getBoolean(RUN_KEY, false))
+                            handler.postDelayed(this, 1200);
                     }
 
                     counter++;

@@ -120,7 +120,9 @@ public class TapCodeTapView extends QuestionForm {
 
     ToneGenerator toneGen1;
     CountDownTimer pauseTimer;
+    CountDownTimer longPauseTimer;
     float pause = 600;
+    float longPause = 2000;
 
     private void initBackground(){
         toneGen1 = new ToneGenerator(AudioManager.STREAM_MUSIC, 100);
@@ -131,12 +133,32 @@ public class TapCodeTapView extends QuestionForm {
                 int progress = (int) (((pause-millisUntilFinished)/pause)*100f);
                 Log.i("progress",progress+" ");
                 progressBar.setProgress(100-progress);
+                pauseText.setText("short pause");
             }
 
             @Override
             public void onFinish() {
                 answer.setText(answer.getText().toString()+" ");
+                longPauseTimer.start();
                 progressBar.setProgress(100);
+                pauseText.setText("");
+            }
+        };
+
+        longPauseTimer = new CountDownTimer((long) longPause,5) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                int progress = (int) (((longPause-millisUntilFinished)/longPause)*100f);
+                Log.i("progress",progress+" ");
+                progressBar.setProgress(100-progress);
+                pauseText.setText("long pause");
+            }
+
+            @Override
+            public void onFinish() {
+                answer.setText(answer.getText().toString().trim()+"/");
+                progressBar.setProgress(100);
+                pauseText.setText("");
             }
         };
 
@@ -149,16 +171,18 @@ public class TapCodeTapView extends QuestionForm {
                         vibrator.vibrate(10);
                         progressBar.setProgress(100);
                         mp.start();
+
                         pauseTimer.cancel();
+                        longPauseTimer.cancel();
                         break;
                     case MotionEvent.ACTION_UP:
-
                         answer.setText(answer.getText().toString()+"·");
                         toneGen1.stopTone();
                         vibrator.cancel();
                         pauseTimer.start();
                         break;
                     default:
+                        break;
                 }
                 return true;
             }
@@ -169,6 +193,4 @@ public class TapCodeTapView extends QuestionForm {
         answer = findViewById(R.id.answer);
         answer.setClickable(false);
     }
-
-
 }

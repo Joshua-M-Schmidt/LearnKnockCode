@@ -14,14 +14,21 @@
         <activity
             android:name=".TapCodeListenFrame"
             android:label="Listen"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".TapCodeTapFrame"
             android:label="Tap"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TapCodeListenWordFrame"
+            android:label="Listen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TapCodeTapWordFrame"
+            android:label="Tap"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".StartScreen"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"
             android:exported="true">
