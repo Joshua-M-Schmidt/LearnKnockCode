@@ -1,19 +1,19 @@
 
-<img src="https://github.com/Joshua-M-Schmidt/LearnMorseCode/blob/main/Graphics/play_store_512.png?raw=true" align="right"
+<img src="https://github.com/Joshua-M-Schmidt/LearnKnockCode/blob/main/Assets/icon.png?raw=true" align="right"
      alt="Size Limit logo by Anton Lovchikov" width="120" height="120">
 
-# Learn Morse Code 
+# Learn Tap Code 
 
-Welcome to Learn Morse Code, the ultimate app for mastering the timeless language of dots and dashes! Whether you're a seasoned pro or a curious beginner, this app is your one-stop-shop for everything Morse code.
+Are you tired of using boring old language to communicate with your friends? Do you long for the secret language of prisoners of war? Well, have no fear, because "Learn Tap Code" is here!
 
-With multiple learning methods, including light signals, audio signals, and simulated Morse tools, you'll quickly become a Morse code pro in no time. You can also test your skills with the paper strip reading feature, which will help you sharpen your Morse code reading abilities.
+Our app teaches you the secret language used by prisoners of war, all through the magic of tapping. With a realistic tapping experience, you'll feel like you're tapping right alongside those sneaky POWs.
 
-Learn Morse Code is perfect for anyone who wants to learn Morse code from scratch or simply wants to refresh their skills. The app includes lessons on the alphabet and numbers, ensuring that you have a solid foundation for communicating in Morse code.
+So what are you waiting for? Download "Learn Tap Code" today and start tapping your way to a whole new level of communication!
 
-With its easy-to-use interface and engaging content, Learn Morse Code is suitable for all ages and skill levels. Whether you're learning for fun or for practical reasons, this app is the perfect choice. So download Learn Morse Code today and start your journey to Morse code mastery!
 
-<img src="https://github.com/Joshua-M-Schmidt/LearnMorseCode/blob/main/Graphics/preview.png?raw=true" align="right"
+<img src="https://github.com/Joshua-M-Schmidt/LearnKnockCode/blob/main/Assets/Mockup.png?raw=true" align="right"
      alt="Size Limit logo by Anton Lovchikov" width="100%" height="100%">
+
 
 **currently available on Google Play**
 
