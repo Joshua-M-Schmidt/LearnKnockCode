@@ -1,9 +1,13 @@
 package com.nova.learn_tap_code;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.media.ToneGenerator;
+import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.util.AttributeSet;
@@ -27,6 +31,9 @@ public class TapCodeTapView extends QuestionForm {
     private ProgressBar progressBar;
     private TextView pauseText;
     private ImageButton back;
+
+    SoundPool knockingSound;
+    int knockingSoundId;
 
     public TapCodeTapView(Context context) {
         super(context);
@@ -75,14 +82,13 @@ public class TapCodeTapView extends QuestionForm {
     }
 
     Vibrator vibrator;
-    MediaPlayer mp;
 
     private void init(){
         inflate(getContext(), R.layout.question_morse_task,this);
 
         question = findViewById(R.id.question);
 
-        mp = MediaPlayer.create(getContext(), R.raw.doorknock);
+        createSoundPool();
 
         progressBar = findViewById(R.id.pr_progress_in_circle);
         progressBar.setMax(100);
@@ -105,6 +111,32 @@ public class TapCodeTapView extends QuestionForm {
 
         initAnswerEdit();
         initBackground();
+    }
+
+    protected void createSoundPool() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            createNewSoundPool();
+        } else {
+            createOldSoundPool();
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+    protected void createNewSoundPool(){
+        AudioAttributes attributes = new AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                .build();
+        knockingSound = new SoundPool.Builder()
+                .setAudioAttributes(attributes)
+                .build();
+        knockingSoundId = knockingSound.load(getContext(),R.raw.doorknock,1);
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void createOldSoundPool(){
+        knockingSound = new SoundPool(5,AudioManager.STREAM_MUSIC,0);
+        knockingSoundId = knockingSound.load(getContext(),R.raw.doorknock,1);
     }
 
     @Override
@@ -170,7 +202,7 @@ public class TapCodeTapView extends QuestionForm {
                     case MotionEvent.ACTION_DOWN:
                         vibrator.vibrate(10);
                         progressBar.setProgress(100);
-                        mp.start();
+                        knockingSound.play(knockingSoundId, 1, 1, 0, 0, 1);
 
                         pauseTimer.cancel();
                         longPauseTimer.cancel();
